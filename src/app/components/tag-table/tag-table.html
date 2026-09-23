@@ -1,0 +1,24 @@
+<div class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>Tag</th>
+        <th>Value</th>
+        <th>Unit</th>
+        <th>Status</th>
+        <th>Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (tag of tagList; track tag.name) {
+        <tr>
+          <td class="td-tag">{{ tag.name }}</td>
+          <td class="td-value">{{ tag.value }}</td>
+          <td>{{ tag.unit }}</td>
+          <td><span class="td-dot" [class.alarm]="tag.alarmState"></span></td>
+          <td class="td-ts">{{ fmtTs(tag.ts) }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,61 @@
+<div class="dashboard">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">⛽</div>
+      NOV — Oil & Gas IoT Monitor
+    </div>
+    <div class="header-right">
+      <div class="status-pill">
+        <div class="status-dot" [class.live]="connected"></div>
+        <span>{{ connected ? 'Live' : 'Connecting...' }}</span>
+      </div>
+      <div class="clock">{{ clock }}</div>
+    </div>
+  </header>
+
+  <!-- Stack banner -->
+  <div class="arch-banner">
+    <span class="arch-label">Stack:</span>
+    <span class="arch-tag">PLC Simulator</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-tag">MQTT / HiveMQ</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-tag">FastAPI / Render</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-tag">InfluxDB Cloud</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-tag">Angular App</span>
+  </div>
+
+  <main>
+    <!-- Gauges -->
+    <div class="section-label">Live Field Readings</div>
+    <div class="gauge-grid">
+      @for (t of tagEntries; track t.name) {
+        <app-gauge
+          [tag]="t.name"
+          [value]="t.value"
+          [unit]="t.unit"
+          [min]="t.min"
+          [max]="t.max"
+          [alarmState]="t.alarmState ?? null">
+        </app-gauge>
+      }
+    </div>
+
+    <!-- Table + Alarms -->
+    <div class="bottom-row">
+      <div>
+        <div class="section-label">Tag Register</div>
+        <app-tag-table [tags]="tags"></app-tag-table>
+      </div>
+      <div>
+        <div class="section-label">Alarms</div>
+        <app-alarm-panel [alarms]="alarms"></app-alarm-panel>
+      </div>
+    </div>
+  </main>
+
+</div>

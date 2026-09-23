@@ -1,0 +1,23 @@
+<div class="alarm-panel">
+  <div class="alarm-header">
+    <span class="alarm-title">Active Alarms</span>
+    <span class="alarm-count">{{ alarms.length }}</span>
+  </div>
+  <div class="alarm-list">
+    @if (alarms.length === 0) {
+      <div class="no-alarms">No alarms</div>
+    }
+    @for (alarm of alarms; track alarm.ts) {
+      <div class="alarm-item">
+        <div class="alarm-sev"
+          [class.high]="alarm.severity==='high'"
+          [class.low]="alarm.severity==='low'">
+        </div>
+        <div class="alarm-body">
+          <div class="alarm-msg">{{ alarm.message }}</div>
+          <div class="alarm-time">{{ fmtTs(alarm.ts) }}</div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
